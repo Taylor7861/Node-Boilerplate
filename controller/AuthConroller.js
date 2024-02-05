@@ -65,7 +65,7 @@ exports.userLogin = async (req, res) => {
     // Find the user in the database 
     const user = await User.findOne({ email: req.body.email });
 
-    if (!user) {
+    if (!user) {  
       return res.status(401).json({ error: 'Invalid email' });
     }
 

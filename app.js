@@ -1,35 +1,32 @@
 
-
-
-
-
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const AuthRoutes = require('./routes/AuthRoutes');
 const bodyParser = require('body-parser');
+const authRouter = require('./routes/AuthRoutes');
+const ratingRouter = require('./routes/ratingRoutes')
 const path = require('path')
-const bcrypt = require('bcryptjs');
-
 const app = express();
 app.use(express.static('public'))
 
 
-
-
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
-const router = require('./routes/AuthRoutes');
+ 
 
 app.use(cors());
 app.use(express.json());
-    app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: true}))
 
-  app.use('/' , router)
-  app.use('/login',router)
-  app.use('/Register',router)
+  app.use('/' , authRouter);
+  app.use('/login',authRouter);
+  app.use('/Register',authRouter);
+  app.use('/api',ratingRouter);
+  app.use('/api',ratingRouter);
 
-  
+
+
+
 
 
 // Connect to MongoDB using Mongoose
